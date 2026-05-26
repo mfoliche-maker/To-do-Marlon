@@ -11,7 +11,11 @@ body {
   margin: 0;
   font-family: 'Inter', system-ui, sans-serif;
   overscroll-behavior: none;
-  background-color: #f1f5f9;
+  background-color: #0d0d14;
+  background-image:
+    radial-gradient(ellipse at 20% 0%, rgba(124, 58, 237, 0.07) 0%, transparent 55%),
+    radial-gradient(ellipse at 80% 100%, rgba(124, 58, 237, 0.05) 0%, transparent 55%);
+  color: #e8e6f0;
 }
 
 #root {
@@ -38,4 +42,13 @@ input[type="text"] {
 
 .task-enter {
   animation: slideIn 0.2s ease-out;
+}
+
+@keyframes glowPulse {
+  0%, 100% { opacity: 0.5; }
+  50%       { opacity: 0.8; }
+}
+
+.header-glow {
+  animation: glowPulse 5s ease-in-out infinite;
 }
