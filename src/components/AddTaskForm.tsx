@@ -5,18 +5,33 @@ interface Props {
   onAdd: (text: string, priority: Priority, category: Category) => void
 }
 
-const priorities: { value: Priority; label: string; color: string }[] = [
-  { value: 'low', label: 'Baixa', color: 'bg-green-100 text-green-700 border-green-200' },
-  { value: 'medium', label: 'Média', color: 'bg-yellow-100 text-yellow-700 border-yellow-200' },
-  { value: 'high', label: 'Alta', color: 'bg-red-100 text-red-700 border-red-200' },
+const priorities: { value: Priority; label: string; idle: string; active: string }[] = [
+  {
+    value:  'low',
+    label:  'Baixa',
+    idle:   'bg-night-elevated text-night-muted border-night-border',
+    active: 'bg-emerald-500/10 text-emerald-400 border-emerald-500/30',
+  },
+  {
+    value:  'medium',
+    label:  'Média',
+    idle:   'bg-night-elevated text-night-muted border-night-border',
+    active: 'bg-amber-500/10 text-amber-400 border-amber-500/30',
+  },
+  {
+    value:  'high',
+    label:  'Alta',
+    idle:   'bg-night-elevated text-night-muted border-night-border',
+    active: 'bg-rose-500/10 text-rose-400 border-rose-500/30',
+  },
 ]
 
 const categories: { value: Category; label: string; emoji: string }[] = [
-  { value: 'pessoal', label: 'Pessoal', emoji: '👤' },
+  { value: 'pessoal',  label: 'Pessoal',  emoji: '👤' },
   { value: 'trabalho', label: 'Trabalho', emoji: '💼' },
-  { value: 'compras', label: 'Compras', emoji: '🛒' },
-  { value: 'saúde', label: 'Saúde', emoji: '💪' },
-  { value: 'outros', label: 'Outros', emoji: '📌' },
+  { value: 'compras',  label: 'Compras',  emoji: '🛒' },
+  { value: 'saúde',    label: 'Saúde',    emoji: '💪' },
+  { value: 'outros',   label: 'Outros',   emoji: '📌' },
 ]
 
 export default function AddTaskForm({ onAdd }: Props) {
@@ -36,7 +51,7 @@ export default function AddTaskForm({ onAdd }: Props) {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="bg-white rounded-2xl shadow-sm p-4 mb-4">
+    <form onSubmit={handleSubmit} className="bg-night-surface rounded-2xl border border-night-border p-4 mb-4">
       <div className="flex gap-2">
         <input
           ref={inputRef}
@@ -45,12 +60,12 @@ export default function AddTaskForm({ onAdd }: Props) {
           onChange={e => setText(e.target.value)}
           onFocus={() => setExpanded(true)}
           placeholder="Adicionar nova tarefa..."
-          className="flex-1 bg-slate-50 rounded-xl px-4 py-3 text-base outline-none border border-slate-200 focus:border-blue-400 focus:ring-2 focus:ring-blue-100 transition-all placeholder:text-slate-400"
+          className="flex-1 bg-night-elevated rounded-xl px-4 py-3 text-base outline-none border border-night-border focus:border-violet-500/50 focus:ring-2 focus:ring-violet-500/10 transition-all placeholder:text-night-dim text-night-text"
         />
         <button
           type="submit"
           disabled={!text.trim()}
-          className="bg-blue-600 text-white rounded-xl px-4 py-3 font-semibold disabled:opacity-40 active:scale-95 transition-all"
+          className="bg-violet-600 hover:bg-violet-500 text-white rounded-xl px-4 py-3 font-bold text-lg disabled:opacity-30 active:scale-95 transition-all"
         >
           +
         </button>
@@ -59,7 +74,7 @@ export default function AddTaskForm({ onAdd }: Props) {
       {expanded && (
         <div className="mt-3 space-y-3 task-enter">
           <div>
-            <p className="text-xs font-semibold text-slate-500 uppercase tracking-wide mb-2">Prioridade</p>
+            <p className="text-xs font-semibold text-night-muted uppercase tracking-widest mb-2">Prioridade</p>
             <div className="flex gap-2">
               {priorities.map(p => (
                 <button
@@ -67,9 +82,7 @@ export default function AddTaskForm({ onAdd }: Props) {
                   type="button"
                   onClick={() => setPriority(p.value)}
                   className={`flex-1 py-2 px-3 rounded-xl text-sm font-medium border transition-all active:scale-95 ${
-                    priority === p.value
-                      ? p.color + ' border-current shadow-sm'
-                      : 'bg-slate-50 text-slate-500 border-slate-200'
+                    priority === p.value ? p.active : p.idle
                   }`}
                 >
                   {p.label}
@@ -79,7 +92,7 @@ export default function AddTaskForm({ onAdd }: Props) {
           </div>
 
           <div>
-            <p className="text-xs font-semibold text-slate-500 uppercase tracking-wide mb-2">Categoria</p>
+            <p className="text-xs font-semibold text-night-muted uppercase tracking-widest mb-2">Categoria</p>
             <div className="flex gap-2 overflow-x-auto pb-1">
               {categories.map(c => (
                 <button
@@ -88,8 +101,8 @@ export default function AddTaskForm({ onAdd }: Props) {
                   onClick={() => setCategory(c.value)}
                   className={`flex-shrink-0 py-2 px-3 rounded-xl text-sm font-medium border transition-all active:scale-95 ${
                     category === c.value
-                      ? 'bg-blue-100 text-blue-700 border-blue-200'
-                      : 'bg-slate-50 text-slate-500 border-slate-200'
+                      ? 'bg-violet-500/10 text-violet-400 border-violet-500/30'
+                      : 'bg-night-elevated text-night-muted border-night-border'
                   }`}
                 >
                   {c.emoji} {c.label}

@@ -24,25 +24,35 @@ export default function App() {
   const progress = tasks.length > 0 ? Math.round((completed.length / tasks.length) * 100) : 0
 
   return (
-    <div className="min-h-svh bg-slate-100 flex flex-col">
-      <header className="bg-blue-600 text-white px-4 pt-12 pb-6">
-        <div className="max-w-md mx-auto">
-          <h1 className="text-2xl font-bold mb-1">Minhas Tarefas</h1>
-          <p className="text-blue-200 text-sm">
+    <div className="min-h-svh bg-night-bg flex flex-col">
+      <header className="relative px-4 pt-12 pb-6 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-b from-violet-950/70 via-[#100d1f]/80 to-night-bg" />
+        <div className="header-glow absolute -top-20 left-1/2 -translate-x-1/2 w-72 h-72 rounded-full bg-violet-600/25 blur-3xl pointer-events-none" />
+
+        <div className="max-w-md mx-auto relative">
+          <div className="flex items-center gap-2.5 mb-1">
+            <div className="w-8 h-8 rounded-xl bg-violet-600/20 border border-violet-500/30 flex items-center justify-center flex-shrink-0">
+              <svg className="w-4 h-4 text-violet-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+            <h1 className="text-2xl font-bold text-night-text tracking-tight">Minhas Tarefas</h1>
+          </div>
+          <p className="text-violet-300/70 text-sm ml-[42px]">
             {active.length === 0
-              ? completed.length > 0 ? 'Tudo concluído!' : 'Sem tarefas ainda'
+              ? completed.length > 0 ? 'Tudo concluído! 🎉' : 'Sem tarefas ainda'
               : `${active.length} tarefa${active.length !== 1 ? 's' : ''} pendente${active.length !== 1 ? 's' : ''}`}
           </p>
 
           {tasks.length > 0 && (
-            <div className="mt-4">
-              <div className="flex justify-between text-xs text-blue-200 mb-1">
+            <div className="mt-5">
+              <div className="flex justify-between text-xs text-night-muted mb-2">
                 <span>Progresso</span>
-                <span>{progress}%</span>
+                <span className="text-violet-400 font-semibold tabular-nums">{progress}%</span>
               </div>
-              <div className="bg-blue-500 rounded-full h-2">
+              <div className="bg-night-elevated rounded-full h-1.5 overflow-hidden">
                 <div
-                  className="bg-white rounded-full h-2 transition-all duration-500"
+                  className="bg-gradient-to-r from-violet-700 to-violet-400 rounded-full h-1.5 transition-all duration-700"
                   style={{ width: `${progress}%` }}
                 />
               </div>
@@ -53,7 +63,7 @@ export default function App() {
 
       <main className="flex-1 px-4 py-4 max-w-md mx-auto w-full pb-8">
         <div className="relative mb-4">
-          <svg className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+          <svg className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-night-dim" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
             <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
           </svg>
           <input
@@ -61,12 +71,12 @@ export default function App() {
             value={search}
             onChange={e => setSearch(e.target.value)}
             placeholder="Buscar tarefas..."
-            className="w-full bg-white rounded-2xl pl-9 pr-4 py-3 text-base outline-none border border-transparent focus:border-blue-300 shadow-sm placeholder:text-slate-400"
+            className="w-full bg-night-elevated rounded-2xl pl-9 pr-4 py-3 text-base outline-none border border-night-border focus:border-violet-500/50 focus:ring-2 focus:ring-violet-500/10 text-night-text placeholder:text-night-dim transition-all"
           />
           {search && (
             <button
               onClick={() => setSearch('')}
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 active:scale-90 transition-all"
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-night-muted active:scale-90 transition-all"
             >
               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
@@ -86,7 +96,7 @@ export default function App() {
 
         <div className="space-y-2">
           {filtered.length === 0 ? (
-            <div className="text-center py-12 text-slate-400">
+            <div className="text-center py-12 text-night-muted">
               <div className="text-5xl mb-3">
                 {search ? '🔍' : filter === 'concluídas' ? '🎉' : '📝'}
               </div>
@@ -117,7 +127,7 @@ export default function App() {
         {completed.length > 0 && filter !== 'ativas' && (
           <button
             onClick={clearCompleted}
-            className="mt-4 w-full py-3 text-sm text-slate-500 font-medium border border-slate-200 rounded-2xl bg-white active:bg-slate-50 active:scale-[0.99] transition-all"
+            className="mt-4 w-full py-3 text-sm text-night-muted font-medium border border-night-border rounded-2xl bg-night-surface active:bg-night-elevated active:scale-[0.99] transition-all hover:border-violet-500/25 hover:text-night-text"
           >
             Limpar concluídas ({completed.length})
           </button>

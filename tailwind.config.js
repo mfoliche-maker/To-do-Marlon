@@ -7,13 +7,15 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: {
-          50: '#eff6ff',
-          100: '#dbeafe',
-          500: '#3b82f6',
-          600: '#2563eb',
-          700: '#1d4ed8',
-        }
+        night: {
+          bg:       '#0d0d14',
+          surface:  '#16161f',
+          elevated: '#1e1e2a',
+          border:   '#2a2a3d',
+          text:     '#e8e6f0',
+          muted:    '#8b8a9e',
+          dim:      '#4a4a63',
+        },
       },
     },
   },
