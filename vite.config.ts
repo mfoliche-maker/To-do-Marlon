@@ -3,6 +3,7 @@ import react from '@vitejs/plugin-react'
 import { VitePWA } from 'vite-plugin-pwa'
 
 export default defineConfig({
+  base: '/To-do-Marlon/',
   plugins: [
     react(),
     VitePWA({
@@ -12,8 +13,8 @@ export default defineConfig({
         name: 'To-Do Marlon',
         short_name: 'To-Do',
         description: 'Aplicativo de tarefas pessoal',
-        theme_color: '#2563eb',
-        background_color: '#f1f5f9',
+        theme_color: '#7c3aed',
+        background_color: '#0d0d14',
         display: 'standalone',
         orientation: 'portrait',
         icons: [
